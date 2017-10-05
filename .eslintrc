@@ -1,0 +1,13 @@
+{
+  "extends": "airbnb-base",
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "no-param-reassign": ["error", { "props": false }]
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}
