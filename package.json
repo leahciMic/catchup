@@ -9,6 +9,9 @@
     "start": "webpack-dev-server",
     "production": "NODE_ENV=production npm start"
   },
+  "engines": {
+    "node": "8.1"
+  },
   "author": "Michael Leaney <leahcimic@gmail.com>",
   "license": "ISC",
   "dependencies": {
