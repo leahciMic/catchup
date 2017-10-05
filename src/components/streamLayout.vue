@@ -7,6 +7,7 @@
       left: stream.x + 'px',
       position: 'absolute',
       overflow: 'hidden',
+      transition: 'all 300ms ease',
       }">
       <stream :stream="stream.rect.stream"></stream>
     </div>
