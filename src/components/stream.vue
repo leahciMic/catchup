@@ -25,7 +25,7 @@
 
 <script>
   export default {
-    props: ['stream', 'dest', 'blur'],
+    props: ['stream', 'dest'],
     mounted() {
       console.log(this.stream);
       this.$refs.video.srcObject = this.stream;
