@@ -1,6 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
-const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
+//const FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -50,7 +50,7 @@ module.exports = {
     },
   },
   plugins: [
-    new FriendlyErrorsPlugin(),
+    //new FriendlyErrorsPlugin(),
     isProduction ? new UglifyJSPlugin({ comments: false, sourceMap: true }) : () => {},
     new HtmlWebpackPlugin({
       filename: 'index.html',
