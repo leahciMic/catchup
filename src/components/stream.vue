@@ -1,5 +1,7 @@
 <template>
-  <video ref="video"></video>
+  <div>
+    <video ref="video"></video>
+  </div>
 </template>
 
 <style>
