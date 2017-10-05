@@ -10,6 +10,7 @@
         <v-layout class="mt-3" style="width:60%;">
           <v-flex xs12>
             <v-text-field
+              ref="entry"
               class="input-group--solo"
               name="input-1"
               label="Room name"
@@ -17,6 +18,7 @@
               single-line
               prepend-icon="room"
               id="testing"
+              @keyup.enter="join"
             ></v-text-field>
             <v-btn primary @click="join">Join</v-btn>
           </v-flex>
@@ -53,6 +55,9 @@
       return {
         roomName: '',
       };
+    },
+    mounted() {
+      this.$refs.entry.focus();
     },
     methods: {
       join() {

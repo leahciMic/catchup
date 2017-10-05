@@ -77,7 +77,7 @@ class Session extends Events {
     let keepAlive;
     this.once('connected', () => { keepAlive = setInterval(() => this.send(message('KEEP_ALIVE')), 5000); });
     this.once('disconnected', () => clearInterval(keepAlive));
-    window.addEventListener('beforeunload', () => {
+    window.addEventListener('unload', () => {
       this.send(message('BYE'));
     });
 
@@ -199,6 +199,23 @@ class Session extends Events {
     const rawData = JSON.stringify({ data, to, from: this.id });
     console.log('>', rawData);
     this.socket.send(rawData);
+  }
+  destroy() {
+    this.send(message('BYE'));
+
+    this.removeAllListeners();
+
+    this.streams.forEach((stream) => {
+      stream.getTracks().forEach((track) => {
+        track.stop();
+        stream.removeTrack(track);
+      });
+    });
+    this.peerConnections.forEach((pc) => {
+      pc.close();
+    });
+
+    setTimeout(() => this.socket.close(), 100);
   }
   async publish(stream, to) {
     this.streams.set(stream.id, stream);
