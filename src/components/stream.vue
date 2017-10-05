@@ -6,6 +6,7 @@
       left: dest ? dest.x + 'px' : '',
       position: 'absolute',
       overflow: 'hidden',
+      transition: 'all 300ms ease',
     }">
     <video ref="video" :style="blur ? 'filter: blur(125px)' : ''"></video>
   </div>
