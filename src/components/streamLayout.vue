@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-show="layout.length" v-resize="resize" style="position: relative;">
+  <v-layout v-show="layout.length" style="position: relative;">
     <div v-for="stream in layout" class="elevation-1" :key="stream.id" :style="{
       height: `${Math.round(stream.height)-10}px`,
       width: `${Math.round(stream.width)-10}px`,
@@ -16,6 +16,7 @@
 <script>
   import stream from 'components/stream';
   import calcLayout from 'lib/calcLayout';
+  import debounce from 'lodash/debounce';
 
   export default {
     props: ['streams'],
@@ -28,6 +29,10 @@
     mounted() {
       this.width = this.$parent.$el.clientWidth;
       this.height = this.$parent.$el.clientHeight;
+      window.addEventListener('resize', this.resize);
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.resize);
     },
     computed: {
       layout() {
@@ -41,10 +46,10 @@
       }
     },
     methods: {
-      resize() {
+      resize: debounce(function () {
         this.width = this.$parent.$el.clientWidth;
         this.height = this.$parent.$el.clientHeight;
-      }
+      }, 16, { trailing: true })
     },
     components: {
       stream,

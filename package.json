@@ -25,6 +25,7 @@
     "express-session": "^1.15.6",
     "git-rev-sync": "^1.9.1",
     "http-proxy-middleware": "^0.17.4",
+    "lodash": "^4.17.4",
     "lru-cache": "^4.1.1",
     "mdi": "^2.0.46",
     "memory-fs": "^0.4.1",
