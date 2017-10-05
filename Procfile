@@ -1,1 +1,1 @@
-web: ./node_modules/.bin/webpack-dev-sever
+web: node server.js
