@@ -85,14 +85,15 @@ export default (width, height, rects, tol = 0.1) => {
 
     const cellWidth = i !== rows - 1 ? cellRect.width : width / (rects.length - i * cols);
 
-    const res = adjustDestForCropTolerance(rect, tol, {
+    const res = {
       x: j * cellWidth,
       y: i * cellRect.height,
       width: cellWidth,
       height: cellRect.height,
-    });
+      rect,
+    };
 
-    res.rect = rect;
+    res.adjDest = adjustDestForCropTolerance(rect, tol, res);
 
     return res;
   });

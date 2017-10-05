@@ -1,14 +1,9 @@
 <template>
   <v-layout v-show="layout.length" style="position: relative;">
-    <stream v-for="stream in layout" class="elevation-1" :key="stream.id" :stream="stream.rect.stream" :style="{
-      height: `${Math.round(stream.height)-10}px`,
-      width: `${Math.round(stream.width)-10}px`,
-      top: stream.y + 'px',
-      left: stream.x + 'px',
-      position: 'absolute',
-      overflow: 'hidden',
-      transition: 'all 300ms ease',
-      }"/>
+    <div style="filter: blur(75px);">
+      <stream v-for="stream in layout" class="elevation-1" :key="stream.id" :stream="stream.rect.stream" :dest="stream"/>
+    </div>
+    <stream v-for="stream in layout" class="elevation-1" :key="stream.id" :stream="stream.rect.stream" :dest="stream.adjDest"/>
   </v-layout>
 </template>
 
