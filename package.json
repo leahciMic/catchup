@@ -6,7 +6,7 @@
   "private": "true",
   "scripts": {
     "test": "jest",
-    "start": "webpack-dev-server",
+    "start": "./node_modules/.bin/webpack-dev-server",
     "production": "NODE_ENV=production npm start"
   },
   "engines": {
