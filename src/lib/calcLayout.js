@@ -51,14 +51,25 @@ export default (width, height, rects, tol = 0.1) => {
   let cols = Math.ceil(floatCols);
   let rows = Math.ceil(floatRows);
 
-  while ((cols - 1) * rows >= rects.length || cols * (rows - 1) >= rects.length) {
-    const colErr = Math.abs((cols - 1) / rows - floatCols / floatRows);
-    const rowErr = Math.abs(cols / (rows - 1) - floatCols / floatRows);
+  while (true) {
+    const colsCanDecrement = (cols - 1) * rows >= rects.length;
+    const rowsCanDecrement = cols * (rows - 1) >= rects.length;
 
-    if (colErr < rowErr && (cols - 1) * rows >= rects.length) {
+    if (colsCanDecrement && rowsCanDecrement) {
+      const colErr = Math.abs((cols - 1) / rows - floatCols / floatRows);
+      const rowErr = Math.abs(cols / (rows - 1) - floatCols / floatRows);
+
+      if (colErr < rowErr) {
+        cols--;
+      } else {
+        rows--;
+      }
+    } else if (colsCanDecrement) {
       cols--;
-    } else {
+    } else if (rowsCanDecrement) {
       rows--;
+    } else {
+      break;
     }
   }
 
@@ -72,10 +83,12 @@ export default (width, height, rects, tol = 0.1) => {
     const i = Math.floor(index / cols);
     const j = index % cols;
 
+    const cellWidth = i !== rows - 1 ? cellRect.width : width / (rects.length - i * cols);
+
     const res = adjustDestForCropTolerance(rect, tol, {
-      x: j * cellRect.width,
+      x: j * cellWidth,
       y: i * cellRect.height,
-      width: cellRect.width,
+      width: cellWidth,
       height: cellRect.height,
     });
 
