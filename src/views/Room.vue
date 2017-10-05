@@ -53,6 +53,14 @@
           stream
         });
       });
+      this.session.on('streamDestroyed', ({ id }) => {
+        for (let i = 0; i < this.remoteStreams.length; i += 1) {
+          if (this.remoteStreams[i].id === id) {
+            this.remoteStreams.splice(i, 1);
+            break;
+          }
+        }
+      });
     },
     components: {
       loading,

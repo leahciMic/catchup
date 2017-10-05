@@ -1,8 +1,8 @@
 <template>
   <v-layout v-show="layout.length" v-resize="resize" style="position: relative;">
-    <div v-for="stream in layout" :key="stream.id" :style="{
-      height: stream.height + 'px',
-      width: stream.width + 'px',
+    <div v-for="stream in layout" class="elevation-1" :key="stream.id" :style="{
+      height: `${Math.round(stream.height)-10}px`,
+      width: `${Math.round(stream.width)-10}px`,
       top: stream.y + 'px',
       left: stream.x + 'px',
       position: 'absolute',

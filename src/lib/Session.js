@@ -2,6 +2,18 @@ import Events from 'events';
 
 const filter = check => callback => (...args) => check(...args) && callback(...args);
 
+async function getDimensions(stream) {
+  const { width, height } = stream.getVideoTracks()[0].getSettings();
+  if (width > 0) {
+    return { width, height };
+  }
+  const video = document.createElement('video');
+  video.srcObject = stream;
+  await video.play();
+  return { height: video.videoHeight, width: video.videoWidth };
+}
+
+
 function isRequired(err) {
   throw new err;
 }
@@ -62,6 +74,13 @@ class Session extends Events {
 
     this.once('connected', () => this.send(message('HI')));
 
+    let keepAlive;
+    this.once('connected', () => { keepAlive = setInterval(() => this.send(message('KEEP_ALIVE')), 5000); });
+    this.once('disconnected', () => clearInterval(keepAlive));
+    window.addEventListener('beforeunload', () => {
+      this.send(message('BYE'));
+    });
+
     this.onType('HI', (data, from) => {
       this.connections.set(from, {
         streams: [],
@@ -70,6 +89,15 @@ class Session extends Events {
     });
 
     this.onType('BYE', (data, from) => {
+      this.remoteStreams.forEach((stream, key) => {
+        if (stream.from === from) {
+          const pc = this.peerConnections.get(`${stream.id}-${from}`);
+          pc.close();
+          this.peerConnections.delete(`${stream.id}-${from}`);
+          this.remoteStreams.delete(key);
+          this.emit('streamDestroyed', stream);
+        }
+      });
       this.connections.delete(from);
     });
 
@@ -172,13 +200,11 @@ class Session extends Events {
     console.log('>', rawData);
     this.socket.send(rawData);
   }
-  publish(stream, to) {
-    const { width, height } = stream.getVideoTracks()[0].getSettings();
+  async publish(stream, to) {
     this.streams.set(stream.id, stream);
     this.send(message('PUBLISH', {
       id: stream.id,
-      width,
-      height,
+      ...await getDimensions(stream),
     }), to);
   }
   subscribe(streamId) {
