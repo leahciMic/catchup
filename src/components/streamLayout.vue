@@ -1,6 +1,15 @@
 <template>
   <v-layout v-show="layout.length" v-resize="resize" style="position: relative;">
-    <stream v-for="stream in layout" :key="stream.id" :stream="stream.rect.stream" :style="{ height: stream.height + 'px', width: stream.width + 'px', top: stream.y + 'px', left: stream.x + 'px', position: 'absolute'}"></stream>
+    <div v-for="stream in layout" :key="stream.id" :style="{
+      height: stream.height + 'px',
+      width: stream.width + 'px',
+      top: stream.y + 'px',
+      left: stream.x + 'px',
+      position: 'absolute',
+      overflow: 'hidden',
+      }">
+      <stream :stream="stream.rect.stream"></stream>
+    </div>
   </v-layout>
 </template>
 

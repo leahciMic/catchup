@@ -6,7 +6,7 @@
       </v-flex>
     </v-layout>
 
-    <div v-if="myStream" class="elevation-1" style="position: absolute; top: 32px; right: 32px; z-index:100;">
+    <div v-if="myStream" class="elevation-1" style="position: absolute; top: 32px; right: 32px; width: 160px; height: 120px;  z-index:100;">
       <stream :stream="myStream"> </stream>
     </div>
 
