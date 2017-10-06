@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-parallax src="main-background.jpg" class="mb-3" style="height: 400px;">
+    <v-parallax :src="require('../static/images/main-background.jpg')" class="mb-3" style="height: 400px;">
       <v-layout column align-center justify-center>
         <h1 class="white--text mt-5" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">Catchup</h1>
         <h4 class="white--text" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
@@ -54,7 +54,7 @@
     <v-layout row>
       <v-flex xs12 sm3 offset-sm3>
         <v-card class="ma-2">
-          <v-card-media src="security.png" height="200px">
+          <v-card-media :src="require('../static/images/security.png')" height="200px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
@@ -66,7 +66,7 @@
       </v-flex>
       <v-flex xs12 sm3 fill>
         <v-card class="ma-2">
-          <v-card-media src="speed.jpg" height="200px">
+          <v-card-media :src="require('../static/images/speed.jpg')" height="200px">
           </v-card-media>
           <v-card-title primary-title>
             <div>
