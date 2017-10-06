@@ -51,8 +51,8 @@
       </v-flex>
     </v-layout>
     <v-container grid-list>
-    <v-layout row>
-      <v-flex xs12 sm3 offset-sm3>
+    <v-layout row wrap>
+      <v-flex xs12 sm6 lg4 offset-lg2>
         <v-card class="ma-2">
           <v-card-media :src="require('../static/images/security.png')" height="200px">
           </v-card-media>
@@ -64,7 +64,7 @@
           </v-card-title>
         </v-card>
       </v-flex>
-      <v-flex xs12 sm3 fill>
+      <v-flex xs12 sm6 lg4 fill>
         <v-card class="ma-2">
           <v-card-media :src="require('../static/images/speed.jpg')" height="200px">
           </v-card-media>
