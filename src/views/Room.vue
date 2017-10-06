@@ -15,7 +15,7 @@
 </template>
 
 <script>
-  import Session from 'lib/session.js';
+  import Session from 'lib/Session.js';
   import { mapState } from 'vuex';
   import loading from 'components/loading';
   import stream from 'components/stream';
