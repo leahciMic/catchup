@@ -6,9 +6,10 @@
   "private": "true",
   "scripts": {
     "test": "jest",
-    "start": "./node_modules/.bin/webpack-dev-server",
+    "start": "webpack-dev-server",
     "build": "NODE_ENV=production ./node_modules/.bin/webpack",
-    "production": "NODE_ENV=production npm start"
+    "production": "NODE_ENV=production node server.js",
+    "heroku-postbuild": "npm run build"
   },
   "engines": {
     "node": "8.1"
